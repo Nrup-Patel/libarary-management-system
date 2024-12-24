@@ -18,13 +18,16 @@ function BookApp() {
   // Fetch all books
   const fetchBooks = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}?action=listBooks`);
-      console.log(response);
-      setBooks(response.data);
+        const response = await axios.get(`${API_BASE_URL}?action=listBooks`);
+        const booksData = Array.isArray(response.data) 
+            ? response.data // Use the array directly if it is an array
+            : JSON.parse(response.data.replace(/^.*in backend/, '').trim()); // Parse if extra text exists
+        setBooks(booksData);
     } catch (error) {
-      console.error("Error fetching books:", error);
+        console.error("Error fetching books:", error);
     }
-  };
+};
+
 
   // Add a new book
   const handleAddBook = async () => {

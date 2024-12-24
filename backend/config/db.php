@@ -19,7 +19,7 @@ class Database {
                     DB_PASS
                 );
                 $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                echo "Database connection established successfully."; // Debugging message
+                // echo "Database connection established successfully."; // Debugging message
             } catch (PDOException $e) {
                 die("Database connection failed: " . $e->getMessage());
             }
