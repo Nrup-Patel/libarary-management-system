@@ -12,6 +12,7 @@ function BookApp() {
     genre: "",
     publication_year: "",
     total_copies: "",
+    available_copies:""
   });
   const [editingBook, setEditingBook] = useState(null);
 
@@ -46,6 +47,7 @@ function BookApp() {
         genre: "",
         publication_year: "",
         total_copies: "",
+        available_copies:""
       });
     } catch (error) {
       console.error("Error adding book:", error);
@@ -77,20 +79,18 @@ function BookApp() {
   // Delete a book
   const handleDeleteBook = async (id) => {
     try {
-      await axios.delete(`${API_BASE_URL}?action=deleteBook`, JSON.stringify({
-        data: { id },
-      }),
-      {
+      await axios.delete(`${API_BASE_URL}?action=deleteBook`, {
         headers: {
           "Content-Type": "application/json", // Correct content type
         },
-      }
-    );
-      fetchBooks();
+        data: JSON.stringify({ id }), // Pass the id as part of the body
+      });
+      fetchBooks(); // Refresh the list of books after deletion
     } catch (error) {
       console.error("Error deleting book:", error);
     }
   };
+  
 
   useEffect(() => {
     fetchBooks();
@@ -192,6 +192,18 @@ function BookApp() {
 
           }
         />
+        {
+          !editingBook &&
+          <input
+          type="number"
+          placeholder="Available Copies"
+          onChange={(e) =>setNewBook({
+          ...newBook,
+          available_copies: Number(e.target.value), // Convert to number
+        })
+          }
+        />
+        }
         <button onClick={editingBook ? handleUpdateBook : handleAddBook}>
           {editingBook ? "Update Book" : "Add Book"}
         </button>

@@ -1,15 +1,17 @@
 import { useState } from 'react'
 import './App.css'
-import Book from './components/Book'
+import BookSearch from './components/BookSearch'
+
+import "./index.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-    <Book/>
-    </>
-  )
+    <div className="bg-black">
+      sdfsdf
+      <BookSearch />
+    </div>
+  );
 }
+
 
 export default App
