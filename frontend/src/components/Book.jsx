@@ -23,6 +23,7 @@ function BookApp() {
             ? response.data // Use the array directly if it is an array
             : JSON.parse(response.data.replace(/^.*in backend/, '').trim()); // Parse if extra text exists
         setBooks(booksData);
+        console.log(booksData);
     } catch (error) {
         console.error("Error fetching books:", error);
     }
@@ -32,7 +33,12 @@ function BookApp() {
   // Add a new book
   const handleAddBook = async () => {
     try {
-      await axios.post(`${API_BASE_URL}?action=addBook`, newBook);
+      console.log(newBook);
+      await axios.post(`${API_BASE_URL}?action=addBook`, JSON.stringify(newBook),{
+        headers: {
+          "Content-Type": "application/json", // Correct content type
+        },
+      });
       fetchBooks();
       setNewBook({
         title: "",
@@ -49,20 +55,37 @@ function BookApp() {
   // Update a book
   const handleUpdateBook = async () => {
     try {
-      await axios.put(`${API_BASE_URL}?action=updateBook`, editingBook);
-      fetchBooks();
-      setEditingBook(null);
+      console.log("Editing book is:", editingBook);
+      await axios.post(
+        `${API_BASE_URL}?action=updateBook`, // Correct API endpoint
+        JSON.stringify(editingBook), // Ensure JSON data is sent
+        {
+          headers: {
+            "Content-Type": "application/json", // Correct content type
+          },
+        }
+      );
+      fetchBooks(); // Refresh books after update
+      setEditingBook(null); // Clear editing state
     } catch (error) {
       console.error("Error updating book:", error);
     }
   };
+  
+  
 
   // Delete a book
   const handleDeleteBook = async (id) => {
     try {
-      await axios.delete(`${API_BASE_URL}?action=deleteBook`, {
+      await axios.delete(`${API_BASE_URL}?action=deleteBook`, JSON.stringify({
         data: { id },
-      });
+      }),
+      {
+        headers: {
+          "Content-Type": "application/json", // Correct content type
+        },
+      }
+    );
       fetchBooks();
     } catch (error) {
       console.error("Error deleting book:", error);
@@ -102,7 +125,7 @@ function BookApp() {
               <td>{book.total_copies}</td>
               <td>{book.available_copies}</td>
               <td>
-                <button onClick={() => setEditingBook(book)}>Edit</button>
+                <button onClick={() =>setEditingBook(book)}>Edit</button>
                 <button onClick={() => handleDeleteBook(book.id)}>Delete</button>
               </td>
             </tr>
@@ -148,8 +171,8 @@ function BookApp() {
           value={editingBook ? editingBook.publication_year : newBook.publication_year}
           onChange={(e) =>
             editingBook
-              ? setEditingBook({ ...editingBook, publication_year: e.target.value })
-              : setNewBook({ ...newBook, publication_year: e.target.value })
+              ? setEditingBook({ ...editingBook, publication_year: Number(e.target.value) })
+              : setNewBook({ ...newBook, publication_year: Number(e.target.value) })
           }
         />
         <input
@@ -158,8 +181,15 @@ function BookApp() {
           value={editingBook ? editingBook.total_copies : newBook.total_copies}
           onChange={(e) =>
             editingBook
-              ? setEditingBook({ ...editingBook, total_copies: e.target.value })
-              : setNewBook({ ...newBook, total_copies: e.target.value })
+      ? setEditingBook({
+          ...editingBook,
+          total_copies: Number(e.target.value), // Convert to number
+        })
+      : setNewBook({
+          ...newBook,
+          total_copies: Number(e.target.value), // Convert to number
+        })
+
           }
         />
         <button onClick={editingBook ? handleUpdateBook : handleAddBook}>

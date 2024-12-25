@@ -8,7 +8,6 @@ class BookController {
     private $bookModel;
 
     public function __construct() {
-        echo 'in backend';
         $db = new Database();
         $this->bookModel = new Book($db->connect());
     }
@@ -20,25 +19,25 @@ class BookController {
     }
 
     // Add a new book
-    public function addBook() {
-        $data = [
-            ':title' => $_POST['title'],
-            ':author' => $_POST['author'],
-            ':genre' => $_POST['genre'],
-            ':publication_year' => $_POST['publication_year'],
-            ':total_copies' => $_POST['total_copies'],
-            ':available_copies' => $_POST['total_copies'],
-        ];
+    public function addBook($data) {
+        // echo json_encode(["data at book COnttoller php for new book"=>$data]);
         $this->bookModel->addBook($data);
         echo json_encode(['message' => 'Book added successfully']);
     }
 
     // Delete a book
-    public function deleteBook() {
-        $id = $_POST['id'];
+    public function deleteBook($id) {
         $this->bookModel->deleteBook($id);
         echo json_encode(['message' => 'Book deleted successfully']);
     }
+    public function updateBook($data) {
+        // Decode JSON data from the POST body
+        // Update the book in the database
+        $this->bookModel->updateBook( $data);
+        echo json_encode(['message' => 'Book updated successfully']);
+    }
+    
+    
 }
 
 ?>
