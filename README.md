@@ -46,6 +46,8 @@ This guide will help you set up the Library Management System (LMS) with a React
    ```
       cd C:\xampp\htdocs
    ```
+![Navigate to htdocs folder](https://raw.githubusercontent.com/Nrup-Patel/libarary-management-system/main/set-up-images/navigate_to_htdocs.jpg)
+
 3. Clone the repository into the htdocs folder with the name `Library-Management-System`:
    ```
       git clone https://github.com/Nrup-Patel/libarary-management-system.git
