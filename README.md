@@ -50,6 +50,7 @@ This guide will help you set up the Library Management System (LMS) with a React
 
 3. Clone the repository into the htdocs folder with the name `Library-Management-System`:
 ![open command prompt](https://raw.githubusercontent.com/Nrup-Patel/libarary-management-system/main/set-up-images/open_cmd_in_htdocs.jpg)
+![open command prompt](https://raw.githubusercontent.com/Nrup-Patel/libarary-management-system/main/set-up-images/cmd2.jpg)
    ```
       git clone https://github.com/Nrup-Patel/libarary-management-system.git
    ```
