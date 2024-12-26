@@ -1,31 +1,81 @@
-# React & Tailwind CSS Starter Pack
+# Library Management System
 
-This is a starter pack for creating React projects with Tailwind CSS configured. It uses React version **18.2** and Tailwind CSS version **3.2**.
+This project is a **Library Management System** built with **React.js** on the frontend and **PHP** on the backend. It allows users to manage library functions such as managing books, members, loans, and more, with user authentication and a responsive user interface.
 
-## Usage
+---
 
-This starter pack includes a basic setup for using **Tailwind CSS with React**. To start building your own components and styles, follow these steps:
+## Table of Contents
 
-1. Clone the repository to your local machine.
-    ```sh
-    git clone https://github.com/thepranaygupta/react-tailwind-css-starter-pack.git
-    ```
+1. [Features](#features)
+2. [Technologies Used](#technologies-used)
+3. [Installation Guide](#installation-guide)
+4. [Usage](#usage)
+5. [Folder Structure](#folder-structure)
+6. [API Endpoints](#api-endpoints)
+7. [License](#license)
 
-1. Install the required packages.
-    ```sh
-    cd react-tailwind-css-starter-pack
-    npm install
-    ```
+---
 
-1. Start the development server.
-    ```sh
-    npm start
-    ```
-1. Open the project in your browser at [`http://localhost:3000`](http://localhost:3000) to view your project.
-1. Create your React components and add your styles using Tailwind classes. You can also create new CSS files and import them into your components.
+## Features
 
-The project is set up to use `postcss-cli` to process your CSS files. You can add your own `tailwind.config.js` file to customize your Tailwind setup.
+- User Authentication (Login/Logout).
+- Dashboard to manage books, members, loans, and more.
+- Search functionality for books.
+- Member and loan management.
+- Fully responsive and user-friendly UI.
+- Backend built using PHP with session-based authentication.
 
-## Contributing
+---
 
-Contributions are welcome! If you have any suggestions or find any issues, please feel free to open an issue or a pull request.
+## Technologies Used
+
+### Frontend:
+- React.js
+- React Router
+- Bootstrap (for styling)
+
+### Backend:
+- PHP
+- MySQL (Database)
+
+---
+
+## Installation Guide
+
+Follow the steps below to set up the project on your local machine.
+
+### Prerequisites
+
+1. Node.js (for running React)
+   - [Download Node.js](https://nodejs.org)
+2. PHP (for backend)
+   - [Download PHP](https://www.php.net/downloads)
+3. MySQL or any other database system
+   - [Download MySQL](https://dev.mysql.com/downloads/)
+4. A local server like XAMPP/WAMP or an equivalent setup.
+
+### Backend Setup (PHP)
+
+1. Clone the repository or download the backend folder.
+2. Move the backend files to your local server directory (e.g., `htdocs` for XAMPP).
+3. Import the database:
+   - Open PHPMyAdmin.
+   - Create a database (e.g., `library_system`).
+   - Import the SQL file provided in the `backend/sql/` folder.
+4. Configure the database connection:
+   - Update the `backend/config.php` file with your database credentials:
+     ```php
+     <?php
+     $host = 'localhost';
+     $user = 'root';
+     $password = '';
+     $database = 'library_system';
+     ?>
+     ```
+
+### Frontend Setup (React)
+
+1. Clone the repository or download the frontend folder.
+2. Navigate to the `frontend` directory:
+   ```bash
+   cd frontend
