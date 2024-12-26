@@ -1,92 +1,129 @@
-# Library Management System
+# Library Management System (LMS) Setup Guide
 
-This project is a **Library Management System** built with **React.js** on the frontend and **PHP** on the backend. It uses **PostgreSQL** as the database, managed via **pgAdmin**. The system allows users to manage library functions such as books, members, loans, and more, with user authentication and a responsive UI.
-
----
-
-## Table of Contents
-
-1. [Features](#features)
-2. [Technologies Used](#technologies-used)
-3. [Installation Guide](#installation-guide)
-4. [Usage](#usage)
-5. [Folder Structure](#folder-structure)
-6. [API Endpoints](#api-endpoints)
-7. [License](#license)
+This guide will help you set up the Library Management System (LMS) with a React-based frontend and a PHP backend using XAMPP, PostgreSQL, and pgAdmin4.
 
 ---
 
-## Features
+## Prerequisites
 
-- User Authentication (Login/Logout).
-- Dashboard to manage books, members, and loans.
-- Search functionality for books.
-- Member and loan management.
-- Fully responsive and user-friendly UI.
-- PostgreSQL database with powerful querying.
+- **XAMPP**: [Download here](https://www.apachefriends.org/index.html).
+- **PostgreSQL** and **pgAdmin4**: [Download here](https://www.postgresql.org/download/).
+- **Node.js**: [Download here](https://nodejs.org/).
+- A modern web browser.
 
 ---
 
-## Technologies Used
+## Step 1: Set Up XAMPP
 
-### Frontend:
-- React.js
-- React Router
-- Bootstrap (for styling)
+### 1.1 Install XAMPP
+1. Download XAMPP from the [Apache Friends website](https://www.apachefriends.org/index.html).
+2. Run the installer and select **Apache** and **MySQL** during the setup process.
 
-### Backend:
-- PHP
-- PostgreSQL (Database)
-- pgAdmin (Database Management)
+### 1.2 Start XAMPP Control Panel
+1. Launch the XAMPP Control Panel from the installation directory (e.g., `C:\xampp\xampp-control.exe`).
+2. Start the **Apache** and **MySQL** servers by clicking **Start** next to each service.
 
 ---
 
-## Installation Guide
+## Step 2: Install PostgreSQL and pgAdmin4
 
-Follow the steps below to set up the project on your local machine.
+### 2.1 Install PostgreSQL
+1. Download PostgreSQL from the [official website](https://www.postgresql.org/download/).
+2. Run the installer and ensure you select **pgAdmin4** during the installation.
+3. During installation, set a password for the default PostgreSQL superuser `postgres`. Keep this password safe.
 
-### Prerequisites
-
-1. Node.js (for running React)
-   - [Download Node.js](https://nodejs.org)
-2. PHP (for backend)
-   - [Download PHP](https://www.php.net/downloads)
-3. PostgreSQL and pgAdmin
-   - [Download PostgreSQL](https://www.postgresql.org/download/)
+### 2.2 Launch pgAdmin4
+1. Open **pgAdmin4** from your applications.
+2. Log in using the password you set during the PostgreSQL installation.
 
 ---
 
-### Backend Setup (PHP + PostgreSQL)
+## Step 3: Set Up the Database in pgAdmin4
 
-1. **Clone the repository** or download the backend folder.
-2. **Install PostgreSQL**:
-   - Download and install PostgreSQL from the official site.
-   - Set up a PostgreSQL database and user during installation.
-3. **Set up the database**:
-   - Open **pgAdmin** and create a new database (e.g., `library_system`).
-   - Import the provided SQL file (`backend/sql/library_system.sql`) into the database.
-     - Go to `pgAdmin > Your Database > Query Tool`.
-     - Paste the SQL file content and run it.
-4. **Configure the database connection**:
-   - Open `backend/config.php` and update the credentials:
-     ```php
-     <?php
-     $host = 'localhost';
-     $port = '5432'; // Default PostgreSQL port
-     $dbname = 'library_system';
-     $user = 'your_username';
-     $password = 'your_password';
-     ?>
-     ```
-5. **Run the backend server**:
-   - Place the backend files in your server directory (e.g., `htdocs` for XAMPP).
-   - Start your server.
+### 3.1 Create a New Database
+1. Open pgAdmin4 and connect to your PostgreSQL server by clicking on the server name (e.g., `PostgreSQL 15`).
+2. Right-click on **Databases** in the left-hand panel and select **Create > Database**.
+3. Enter `library_system` as the database name and click **Save**.
+
+### 3.2 Import the SQL File
+1. Navigate to:
+   ```
+   C:\xampp\htdocs\backend\sql
+   ```
+2. Open the `lms.sql` file in a text editor.
+3. In pgAdmin4, select your `library_system` database.
+4. Right-click on the database and choose **Query Tool**.
+5. Copy the content of `lms.sql` and paste it into the Query Tool.
+6. Click the **Execute/Run** button (lightning icon) to execute the SQL commands.
 
 ---
 
-### Frontend Setup (React)
+## Step 4: Configure Backend
 
-1. **Clone the repository** or download the frontend folder.
-2. Navigate to the `frontend` directory:
+### 4.1 Update `config.php`
+1. Navigate to:
+   ```
+   C:\xampp\htdocs\backend
+   ```
+2. Open `config.php` in a text editor.
+3. Update the database connection details:
+   ```php
+   <?php
+   $host = 'localhost';
+   $port = '5432';
+   $dbname = 'library_system';
+   $user = 'postgres';
+   $password = 'your_postgres_password';
+   ?>
+   ```
+
+---
+
+## Step 5: Set Up Frontend
+
+### 5.1 Install Node.js Dependencies
+1. Navigate to:
+   ```
+   C:\xampp\htdocs\frontend
+   ```
+2. Open a terminal or command prompt in this directory.
+3. Run the following commands:
    ```bash
-   cd frontend
+   npm install
+   npm run start
+   ```
+
+### 5.2 Access the Application
+- Open your browser and navigate to:
+  ```
+  http://localhost:3000
+  ```
+
+---
+
+## Step 6: Run the Backend
+1. Ensure XAMPP is running with **Apache** and **MySQL** servers started.
+2. Navigate to:
+   ```
+   C:\xampp\htdocs\backend
+   ```
+3. Place your backend code here.
+4. Open the browser and test API endpoints if needed.
+
+---
+
+## Troubleshooting
+
+- If the frontend does not load:
+  - Ensure `npm run start` is running.
+  - Check for errors in the terminal.
+- If the database connection fails:
+  - Verify your `config.php` settings.
+  - Check that PostgreSQL is running.
+- If XAMPP does not start:
+  - Ensure no other service is using ports 80 (Apache) or 3306 (MySQL).
+
+---
+
+You have now successfully set up and configured the Library Management System (LMS).
+
