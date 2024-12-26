@@ -118,8 +118,7 @@ This guide will help you set up the Library Management System (LMS) with a React
    ```
    C:\xampp\htdocs\backend
    ```
-3. Place your backend code here.
-4. Open the browser and test API endpoints if needed.
+3. Open the browser and test API endpoints if needed.
 
 ---
 
