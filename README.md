@@ -150,5 +150,114 @@ This guide will help you set up the Library Management System (LMS) with a React
 
 ---
 
+
+# Library Management System UI
+
+This project is the frontend for the Library Management System (LMS). It includes various pages that allow users to interact with the system, such as logging in, managing books, searching for books, managing members, and viewing loans. Below is an overview of each page and its functionality.
+
+---
+
+## Pages Overview
+
+### 1. **Login Page**
+- **Path**: `/login`
+- **Purpose**: 
+  - Allows users to log into the Library Management System using their credentials.
+  - Users can log in using their email and phone number for verification.
+
+  
+- **Key Components**:
+  - Form for email and phone number input.
+  - Error handling for invalid credentials.
+  - Redirection to the dashboard upon successful login.
+  ![Login Page](./images/login-page.png)
+
+---
+
+### 2. **Features Page**
+- **Path**: `/features`
+- **Purpose**: 
+  - Displays the main features of the Library Management System.
+  - Highlights key functionalities such as book management, member management, loan system, and search capabilities.
+
+- **Key Components**:
+  - List of features available to users.
+  - Brief descriptions and visual aids for each feature.
+
+  ![Features Page](./images/features-page.png)
+  
+---
+
+### 3. **Book Management Page**
+- **Path**: `/book`
+- **Purpose**: 
+  - Allows users to view, add, edit, and delete books in the library catalog.
+  - Users can input book details such as title, author, ISBN, and genre.
+
+- **Key Components**:
+  - Table or list to display all books in the catalog.
+  - Form for adding or editing book details.
+  - Options to delete a book or update its information.
+  ![Book Management Page](./images/book-management-page.png)
+
+---
+
+### 4. **Search Book Page**
+- **Path**: `/searchBook`
+- **Purpose**: 
+  - Allows users to search for books in the library catalog.
+  - Users can filter by title, author, or genre.
+  
+- **Key Components**:
+  - Search bar to input search queries.
+  - Filters for narrowing down the search.
+  - List of search results based on the query.
+  ![Search Book Page](./images/search-book-page.png)
+
+---
+
+### 5. **Member Management Page**
+- **Path**: `/member`
+- **Purpose**: 
+  - Allows the management of library members.
+  - Admins can add, view, edit, or remove members.
+  
+- **Key Components**:
+  - Table of all members with their details.
+  - Form for adding or editing member information (e.g., name, email, phone number).
+  - Options to delete a member from the system.
+  ![Member Management Page](./images/member-management-page.png)
+
+---
+
+### 6. **Loan Management Page**
+- **Path**: `/loan`
+- **Purpose**: 
+  - Displays information about book loans in the library.
+  - Admins can manage loans, including issuing books to members and viewing loan status.
+
+- **Key Components**:
+  - List of current loans with member and book details.
+  - Option to issue new loans and mark them as returned.
+  - Filters to view overdue or pending loans.
+  ![Loan Management Page](./images/loan-management-page.png)
+
+---
+
+### 7. **Dashboard Page**
+- **Path**: `/dashboard`
+- **Purpose**: 
+  - Provides a summary view of the library system.
+  - Displays key statistics such as total books, members, loans, and overdue items.
+  
+- **Key Components**:
+  - Overview of library statistics in graphical or tabular form.
+  - Links to other pages for managing books, members, loans, etc.
+  - Recent activity or notifications related to the library system.
+  ![Dashboard Page](./images/features-page.png)
+
+---
+
+
 You have now successfully set up and configured the Library Management System (LMS).
 
