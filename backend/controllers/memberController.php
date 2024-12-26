@@ -1,40 +1,70 @@
 <?php
+require_once __DIR__ . '/../models/Member.php';
 
-require_once '../config/db.php';
+class MemberController {
+    private $memberModel;
 
-class MemberController
-{
+    public function __construct() {
+        $db = new Database();
+        $this->memberModel = new Member($db->connect());
+    }
+
     // List all members
-    public function listMembers()
-    {
-        global $pdo;
-        $query = "SELECT * FROM Member";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    public function listMembers() {
+        $members = $this->memberModel->getAllMembers();
+        echo json_encode($members);
     }
 
     // Add a new member
-    public function addMember($name, $email, $phone)
-    {
-        global $pdo;
-        $query = "INSERT INTO Member (name, email, phone) VALUES (:name, :email, :phone)";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute([
-            ':name' => $name,
-            ':email' => $email,
-            ':phone' => $phone
-        ]);
+    public function addMember($data) {
+        if (!isset($data['name'], $data['email'], $data['phone'])) {
+            echo json_encode(['error' => 'Missing required fields']);
+            return;
+        }
+        $this->memberModel->addMember($data);
+        echo json_encode(['message' => 'Member added successfully']);
+    }
+
+    // Update a member
+    public function updateMember($data) {
+        if (!isset($data['id'], $data['name'], $data['email'], $data['phone'])) {
+            echo json_encode(['error' => 'Missing required fields']);
+            return;
+        }
+        $this->memberModel->updateMember($data);
+        echo json_encode(['message' => 'Member updated successfully']);
     }
 
     // Delete a member
-    public function deleteMember($id)
-    {
-        global $pdo;
-        $query = "DELETE FROM Member WHERE id = :id";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute([':id' => $id]);
+    public function deleteMember($id) {
+        if ($this->memberModel->hasActiveLoans($id)) {
+            echo json_encode(['error' => 'Member has active loans']);
+            return;
+        }
+        $this->memberModel->deleteMember($id);
+        echo json_encode(['message' => 'Member deleted successfully']);
+    }
+    public function login($email, $phone) {
+        // Use $this->memberModel to access the member model and verify credentials
+        $member = $this->memberModel->verifyCredentials($email, $phone);
+        
+        if ($member) {
+            $_SESSION['user_id'] = $member['id'];
+            $_SESSION['user_name'] = $member['name'];
+            $_SESSION['user_email'] = $member['email'];
+            $_SESSION['user_phone'] = $member['phone'];
+            
+            echo json_encode(['success'=>true, "member"=> $member]);
+            // header('Location: dashboard.php');
+            // exit();
+            return;
+        } else {
+            header('Location: login.php?error=Invalid email or phone');
+            exit();
+        }
+        
     }
 }
+
 
 ?>

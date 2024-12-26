@@ -1,77 +1,75 @@
 <?php
 
-require_once '../config/db.php';
+require_once __DIR__ . '/../config/db.php';
+require_once __DIR__ . '/../models/Loan.php';
 
-class LoanController
-{
-    // List all loans
-    public function listLoans()
-    {
-        global $pdo;
-        $query = "SELECT Loan.*, Book.title AS book_title, Member.name AS member_name 
-                  FROM Loan
-                  INNER JOIN Book ON Loan.book_id = Book.id
-                  INNER JOIN Member ON Loan.member_id = Member.id";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+class LoanController {
+    private $loanModel;
+
+    public function __construct() {
+        $db = new Database();
+        $this->loanModel = new Loan($db->connect()); // Correct assignment
     }
 
-    // Borrow a book
-    public function borrowBook($book_id, $member_id, $due_date)
-    {
-        global $pdo;
-
-        // Check if the book is available
-        $query = "SELECT available_copies FROM Book WHERE id = :book_id";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute([':book_id' => $book_id]);
-        $book = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($book && $book['available_copies'] > 0) {
-            // Create loan record
-            $query = "INSERT INTO Loan (book_id, member_id, due_date) VALUES (:book_id, :member_id, :due_date)";
-            $stmt = $pdo->prepare($query);
-            $stmt->execute([
-                ':book_id' => $book_id,
-                ':member_id' => $member_id,
-                ':due_date' => $due_date
-            ]);
-
-            // Decrease available copies
-            $query = "UPDATE Book SET available_copies = available_copies - 1 WHERE id = :book_id";
-            $stmt = $pdo->prepare($query);
-            $stmt->execute([':book_id' => $book_id]);
-        } else {
-            throw new Exception("Book is not available for borrowing.");
+    public function borrowBook($data) {
+        $book = $this->loanModel->getBookById($data['book_id']);
+        if (!$book) {
+            throw new Exception('Book not found');
         }
-    }
 
-    // Return a book
-    public function returnBook($loan_id)
-    {
-        global $pdo;
-
-        // Find loan details
-        $query = "SELECT book_id FROM Loan WHERE id = :loan_id";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute([':loan_id' => $loan_id]);
-        $loan = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($loan) {
-            // Mark loan as returned
-            $query = "UPDATE Loan SET return_date = CURRENT_DATE WHERE id = :loan_id";
-            $stmt = $pdo->prepare($query);
-            $stmt->execute([':loan_id' => $loan_id]);
-
-            // Increase available copies
-            $query = "UPDATE Book SET available_copies = available_copies + 1 WHERE id = :book_id";
-            $stmt = $pdo->prepare($query);
-            $stmt->execute([':book_id' => $loan['book_id']]);
-        } else {
-            throw new Exception("Invalid loan ID.");
+        if ($book['available_copies'] <= 0) {
+            throw new Exception('Book is not available');
         }
+
+        // Set loan and due dates
+        $data['loan_date'] = date('Y-m-d');
+        $data['due_date'] = date('Y-m-d', strtotime('+7 days')); // Example: 7 days loan period
+
+        $this->loanModel->createLoan($data);
+        $this->loanModel->updateBookCopies($data['book_id'], -1); // Decrease available copies
+        echo json_encode(['success' => true, 'message' => 'Book borrowed successfully']);
     }
+
+    public function returnBook($data) {
+        $loan = $this->loanModel->getLoanById($data['loan_id']);
+        if (!$loan) {
+            throw new Exception('Invalid loan ID');
+        }
+
+        $fine = $this->calculateFine($loan['due_date'], date('Y-m-d'));
+        $this->loanModel->updateLoan($data['loan_id'], ['return_date' => date('Y-m-d'), 'fine' => $fine]);
+        $this->loanModel->updateBookCopies($loan['book_id'], 1); // Increase available copies
+        echo json_encode(['success' => true, 'message' => 'Book returned successfully']);
+    }
+
+    public function listLoans() {
+        $loans = $this->loanModel->getAllLoans();
+        echo json_encode($loans);
+    }
+
+    public function viewLoanDetails($loanId) {
+        $loan = $this->loanModel->getLoanById($loanId);
+        if (!$loan) {
+            echo json_encode(['success' => false, 'message' => 'Loan not found']);
+            return;
+        }
+        echo json_encode($loan);
+    }
+
+    private function calculateFine($dueDate, $returnDate) {
+        $diff = (strtotime($returnDate) - strtotime($dueDate)) / (60 * 60 * 24);
+        return $diff > 0 ? $diff * 5 : 0; // $5 fine per day late
+    }
+    public function listDetailedLoans() {
+        $loans = $this->loanModel->getLoanDetails();
+        if (empty($loans)) {
+            echo json_encode(['success' => false, 'message' => 'No loans found']);
+            return;
+        }
+    
+        echo json_encode(['success' => true, 'data' => $loans]);
+    }
+    
 }
-
 ?>
