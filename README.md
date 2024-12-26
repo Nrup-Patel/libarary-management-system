@@ -37,21 +37,32 @@ This guide will help you set up the Library Management System (LMS) with a React
 2. Log in using the password you set during the PostgreSQL installation.
 
 ---
-
 ## Step 3: Set Up the Database in pgAdmin4
+### 3.1 Clone the Repository
 
-### 3.1 Create a New Database
+1. Open a terminal or command prompt.
+
+2. Navigate to the htdocs folder of your XAMPP installation:
+   ```
+      cd C:\xampp\htdocs
+   ```
+3. Clone the repository into the htdocs folder with the name `Library-Management-System`:
+   ```
+      git clone https://github.com/Nrup-Patel/libarary-management-system.git
+   ```
+
+### 3.2 Create a New Database
 1. Open pgAdmin4 and connect to your PostgreSQL server by clicking on the server name (e.g., `PostgreSQL 15`).
 2. Right-click on **Databases** in the left-hand panel and select **Create > Database**.
-3. Enter `library_system` as the database name and click **Save**.
+3. Enter `lms` as the database name and click **Save**.
 
-### 3.2 Import the SQL File
+### 3.3 Import the SQL File
 1. Navigate to:
    ```
    C:\xampp\htdocs\backend\sql
    ```
 2. Open the `lms.sql` file in a text editor.
-3. In pgAdmin4, select your `library_system` database.
+3. In pgAdmin4, select your `lms` database.
 4. Right-click on the database and choose **Query Tool**.
 5. Copy the content of `lms.sql` and paste it into the Query Tool.
 6. Click the **Execute/Run** button (lightning icon) to execute the SQL commands.
