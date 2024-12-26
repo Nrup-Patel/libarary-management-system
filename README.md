@@ -1,6 +1,6 @@
 # Library Management System
 
-This project is a **Library Management System** built with **React.js** on the frontend and **PHP** on the backend. It allows users to manage library functions such as managing books, members, loans, and more, with user authentication and a responsive user interface.
+This project is a **Library Management System** built with **React.js** on the frontend and **PHP** on the backend. It uses **PostgreSQL** as the database, managed via **pgAdmin**. The system allows users to manage library functions such as books, members, loans, and more, with user authentication and a responsive UI.
 
 ---
 
@@ -19,11 +19,11 @@ This project is a **Library Management System** built with **React.js** on the f
 ## Features
 
 - User Authentication (Login/Logout).
-- Dashboard to manage books, members, loans, and more.
+- Dashboard to manage books, members, and loans.
 - Search functionality for books.
 - Member and loan management.
 - Fully responsive and user-friendly UI.
-- Backend built using PHP with session-based authentication.
+- PostgreSQL database with powerful querying.
 
 ---
 
@@ -36,7 +36,8 @@ This project is a **Library Management System** built with **React.js** on the f
 
 ### Backend:
 - PHP
-- MySQL (Database)
+- PostgreSQL (Database)
+- pgAdmin (Database Management)
 
 ---
 
@@ -50,32 +51,42 @@ Follow the steps below to set up the project on your local machine.
    - [Download Node.js](https://nodejs.org)
 2. PHP (for backend)
    - [Download PHP](https://www.php.net/downloads)
-3. MySQL or any other database system
-   - [Download MySQL](https://dev.mysql.com/downloads/)
-4. A local server like XAMPP/WAMP or an equivalent setup.
+3. PostgreSQL and pgAdmin
+   - [Download PostgreSQL](https://www.postgresql.org/download/)
 
-### Backend Setup (PHP)
+---
 
-1. Clone the repository or download the backend folder.
-2. Move the backend files to your local server directory (e.g., `htdocs` for XAMPP).
-3. Import the database:
-   - Open PHPMyAdmin.
-   - Create a database (e.g., `library_system`).
-   - Import the SQL file provided in the `backend/sql/` folder.
-4. Configure the database connection:
-   - Update the `backend/config.php` file with your database credentials:
+### Backend Setup (PHP + PostgreSQL)
+
+1. **Clone the repository** or download the backend folder.
+2. **Install PostgreSQL**:
+   - Download and install PostgreSQL from the official site.
+   - Set up a PostgreSQL database and user during installation.
+3. **Set up the database**:
+   - Open **pgAdmin** and create a new database (e.g., `library_system`).
+   - Import the provided SQL file (`backend/sql/library_system.sql`) into the database.
+     - Go to `pgAdmin > Your Database > Query Tool`.
+     - Paste the SQL file content and run it.
+4. **Configure the database connection**:
+   - Open `backend/config.php` and update the credentials:
      ```php
      <?php
      $host = 'localhost';
-     $user = 'root';
-     $password = '';
-     $database = 'library_system';
+     $port = '5432'; // Default PostgreSQL port
+     $dbname = 'library_system';
+     $user = 'your_username';
+     $password = 'your_password';
      ?>
      ```
+5. **Run the backend server**:
+   - Place the backend files in your server directory (e.g., `htdocs` for XAMPP).
+   - Start your server.
+
+---
 
 ### Frontend Setup (React)
 
-1. Clone the repository or download the frontend folder.
+1. **Clone the repository** or download the frontend folder.
 2. Navigate to the `frontend` directory:
    ```bash
    cd frontend
