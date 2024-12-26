@@ -81,7 +81,7 @@ This guide will help you set up the Library Management System (LMS) with a React
 
 ## Step 4: Configure Backend
 
-### 4.1 Update `dn+b.php`
+### 4.1 Update `db.php`
 1. Navigate to:
    ```
    C:\xampp\htdocs\Library-management-system\backend
