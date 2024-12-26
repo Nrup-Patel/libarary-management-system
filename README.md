@@ -143,7 +143,7 @@ This guide will help you set up the Library Management System (LMS) with a React
   - Ensure `npm run start` is running.
   - Check for errors in the terminal.
 - If the database connection fails:
-  - Verify your `config.php` settings.
+  - Verify your `db.php` settings.
   - Check that PostgreSQL is running.
 - If XAMPP does not start:
   - Ensure no other service is using ports 80 (Apache) or 3306 (MySQL).

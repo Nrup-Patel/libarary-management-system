@@ -187,13 +187,20 @@ const BookSearch = () => {
   }, [searchFilters, filterBooks]);
 
   return (
-    <div style={{ padding: "20px" }} className="flex  flex-col gap-4 items-center justify-center w-screen">
-      <h1>Book Search</h1>
+    <div
+      style={{ padding: "20px" }}
+      className="flex  flex-col gap-4 items-center justify-center w-screen"
+    >
+      <h1 style={{ fontSize: "2.5em" }} className="mb-3">
+        Book Search
+      </h1>
 
-      <h2>Search Filters</h2>
+
       <div className="w-screen flex flex-col gap-3 items-center justify-center ">
-        <div className="w-50 flex flex-col items-center justify-center gap-2">
-          <div className="form-group row">
+      <h2 style={{ fontSize: '2em' }} className="mb-2">Search Filters</h2>
+      <div className=" w-25 flex flex-col gap-2 w-50 p-4  text-black border-2 rounded" style={{ backgroundColor: '#dadee6' }}>
+          {/* Book Title Input */}
+          <div className="form-group row flex">
             <label className="col-sm-2 col-form-label">Book Title</label>
             <div className="col-sm-10">
               <input
@@ -207,6 +214,7 @@ const BookSearch = () => {
             </div>
           </div>
 
+          {/* Author Input */}
           <div className="form-group row">
             <label className="col-sm-2 col-form-label">Author</label>
             <div className="col-sm-10">
@@ -221,6 +229,7 @@ const BookSearch = () => {
             </div>
           </div>
 
+          {/* Genre Input */}
           <div className="form-group row">
             <label className="col-sm-2 col-form-label">Genre</label>
             <div className="col-sm-10">
@@ -236,14 +245,15 @@ const BookSearch = () => {
           </div>
         </div>
       </div>
-      <h2>Book Results</h2>
+
+      <h2 style={{ fontSize: '2em' }} className="mb-2">Book Results</h2>
       <table className="table table-striped">
         <thead>
           <tr>
             <th scope="col">Book Title</th>
             <th scope="col">Author</th>
             <th scope="col">Genre</th>
-            <th scope="col">Actions</th>
+            {/* <th scope="col">Actions</th> */}
           </tr>
         </thead>
         <tbody>
@@ -253,10 +263,9 @@ const BookSearch = () => {
                 <td>{book.title}</td>
                 <td>{book.author}</td>
                 <td>{book.genre}</td>
-                <td>
-                  <button className="btn btn-primary">Borrow</button>{" "}
-                  {/* You can add action buttons like borrow here */}
-                </td>
+                {/* <td>
+                  <button className="btn btn-primary">Borrow</button>
+                </td> */}
               </tr>
             ))
           ) : (

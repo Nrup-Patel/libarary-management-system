@@ -11,6 +11,7 @@ import Book from "./components/dashboard/Book";
 import Member from "./components/dashboard/Member";
 import Loan from "./components/dashboard/Loan"
 import BookSearch from "./components/dashboard/BookSearch"
+import Error from "./components/Error";
 function App() {
   return (
     <div className=" min-h-screen flex flex-col  overflow-x-hidden bg-light bg-gradient w-screen">
@@ -24,6 +25,9 @@ function App() {
           <Route path="/memberDetails" element={<Member />} />
           <Route path="/loanDetails" element={<Loan />} />
           <Route path="/booksearch" element={<BookSearch />} />
+          <Route path="/" element={<Features />} />
+
+          <Route path="*" element={<Error />} />
         </Routes>
       </BrowserRouter>
     </div>

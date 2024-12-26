@@ -157,12 +157,10 @@ const Loan = () => {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Loan Management</h1>
-
-      <div className="flex w-screen flex-col items-center justify-center">
-        <div className="w-50 flex flex-col items-center justify-center">
-          <h2>Borrow Book</h2>
+    <div style={{ padding: "20px" }} className="container d-flex flex-col justify-content-center w-100">
+      <div className="  gap-3 d-flex flex-col justify-content-center w-full">
+      <h2 style={{ fontSize: '2em' }} className="mb-2">Loan Details</h2>
+      <div className=" w-25 flex flex-col gap-2 w-50 p-4  text-black border-2 rounded" style={{ backgroundColor: '#dadee6' }}>
           <div className="form-group row">
             <label className="col-sm-2 col-form-label">Member ID</label>
             <div className="col-sm-10">
@@ -218,7 +216,7 @@ const Loan = () => {
           </button>
         </div>
       </div>
-      <h2>Loan Details</h2>
+      <h2 style={{fontSize:"1.5em"}}>Loan Details</h2>
       <table className="table table-striped">
         <thead>
           <tr>

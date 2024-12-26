@@ -101,7 +101,6 @@
 
 // export default Navbar;
 
-
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -134,13 +133,17 @@ function Navbar() {
   };
 
   return (
-    <div style={{ width: "100%", overflowX: "hidden" }} >
+    <div style={{ width: "100%", overflowX: "hidden" }}>
       <nav
-        className="navbar navbar-expand-lg navbar-dark mb-5 px-4"
+        className=" fixed-top navbar navbar-expand-lg navbar-dark mb-5 px-4"
         style={{
           backgroundColor: "#127eff",
           width: "100%",
           boxSizing: "border-box",
+          position: "sticky",
+          top: "0",
+          width: "100%",
+          zIndex: 1000,
         }}
       >
         <a className="navbar-brand" href="/features">
@@ -162,16 +165,16 @@ function Navbar() {
             {isLoggedIn ? (
               <>
                 <Link className="nav-item nav-link active" to="/bookDetails">
-                  Book 
+                  Book
                 </Link>
                 <Link className="nav-item nav-link active" to="/booksearch">
                   Search Book
                 </Link>
                 <Link className="nav-item nav-link active" to="/memberDetails">
-                  Member 
+                  Member
                 </Link>
                 <Link className="nav-item nav-link active" to="/loanDetails">
-                  Loan 
+                  Loan
                 </Link>
                 <Link className="nav-item nav-link active" to="/dashboard">
                   Dashboard
