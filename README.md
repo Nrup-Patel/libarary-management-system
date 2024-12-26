@@ -49,36 +49,47 @@ This guide will help you set up the Library Management System (LMS) with a React
 ![Navigate to htdocs folder](https://raw.githubusercontent.com/Nrup-Patel/libarary-management-system/main/set-up-images/navigate_to_htdocs.jpg)
 
 3. Clone the repository into the htdocs folder with the name `Library-Management-System`:
+![open command prompt](https://raw.githubusercontent.com/Nrup-Patel/libarary-management-system/main/set-up-images/open_cmd_in_htdocs.jpg)
    ```
       git clone https://github.com/Nrup-Patel/libarary-management-system.git
    ```
 
 ### 3.2 Create a New Database
 1. Open pgAdmin4 and connect to your PostgreSQL server by clicking on the server name (e.g., `PostgreSQL 15`).
+![open command prompt](https://raw.githubusercontent.com/Nrup-Patel/libarary-management-system/main/set-up-images/open_pgadmin_and_click_on_servers.jpg)
 2. Right-click on **Databases** in the left-hand panel and select **Create > Database**.
+![open command prompt](https://raw.githubusercontent.com/Nrup-Patel/libarary-management-system/main/set-up-images/databases.jpg)
 3. Enter `lms` as the database name and click **Save**.
+![open command prompt](https://raw.githubusercontent.com/Nrup-Patel/libarary-management-system/main/set-up-images/lms.jpg)
 
 ### 3.3 Import the SQL File
 1. Navigate to:
+[!Navigate to lms.sql](https://raw.githubusercontent.com/Nrup-Patel/libarary-management-system/main/set-up-images/lms.sql)
    ```
-   C:\xampp\htdocs\backend\sql
+   C:\xampp\htdocs\Library-management-system\backend\sql
    ```
 2. Open the `lms.sql` file in a text editor.
 3. In pgAdmin4, select your `lms` database.
 4. Right-click on the database and choose **Query Tool**.
+[!Open query tool](https://raw.githubusercontent.com/Nrup-Patel/libarary-management-system/main/set-up-images/open_query_tool.sql)
 5. Copy the content of `lms.sql` and paste it into the Query Tool.
+[!Navigate to lms.sql](https://raw.githubusercontent.com/Nrup-Patel/libarary-management-system/main/set-up-images/lms.sql)
 6. Click the **Execute/Run** button (lightning icon) to execute the SQL commands.
 
 ---
 
 ## Step 4: Configure Backend
 
-### 4.1 Update `config.php`
+### 4.1 Update `dn+b.php`
 1. Navigate to:
    ```
-   C:\xampp\htdocs\backend
+   C:\xampp\htdocs\Library-management-system\backend
    ```
-2. Open `config.php` in a text editor.
+2. Open `config\db.php` in a text editor.
+[!Navigate to db.php](https://raw.githubusercontent.com/Nrup-Patel/libarary-management-system/main/set-up-images/config.jpg)
+[!open to db.php](https://raw.githubusercontent.com/Nrup-Patel/libarary-management-system/main/set-up-images/db_php.jpg)
+
+
 3. Update the database connection details:
    ```php
    <?php
@@ -97,8 +108,9 @@ This guide will help you set up the Library Management System (LMS) with a React
 ### 5.1 Install Node.js Dependencies
 1. Navigate to:
    ```
-   C:\xampp\htdocs\frontend
+   C:\xampp\htdocs\Library-management-system\frontend
    ```
+   [!Navigate to Frontend folder](https://raw.githubusercontent.com/Nrup-Patel/libarary-management-system/main/set-up-images/frontend.jpg)
 2. Open a terminal or command prompt in this directory.
 3. Run the following commands:
    ```bash
@@ -118,7 +130,7 @@ This guide will help you set up the Library Management System (LMS) with a React
 1. Ensure XAMPP is running with **Apache** and **MySQL** servers started.
 2. Navigate to:
    ```
-   C:\xampp\htdocs\backend
+   C:\xampp\htdocs\Library-management-system\backend
    ```
 3. Open the browser and test API endpoints if needed.
 
